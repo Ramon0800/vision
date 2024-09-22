@@ -57,6 +57,7 @@ def dog_cat(img_cat):
     mask=np.zeros(img_o.shape[:2],dtype=np.uint8)
     cv2.fillPoly(mask,[poligono],255)
     mask_INV=cv2.bitwise_not(mask)
+    
     x1_p,y1_p,x2_p,y2_p=detection(img_dog)
     h_destino=y2_p-y1_p
     w_destino=x2_p-x1_p
@@ -76,6 +77,7 @@ def dog_cat(img_cat):
     img_objeto=cv2.bitwise_and(img_o,img_o,mask=mask)
     img_fondo=cv2.bitwise_and(img,img,mask=mask_INV)
     resultado=cv2.add(img_fondo,img_objeto)
+    
     resultado=cv2.resize(resultado,(img.shape[1],img.shape[0]))
     h_results,w_results=resultado.shape[:2]
     img_final[y1:y1+h_results,x1:x1+w_results]=resultado
